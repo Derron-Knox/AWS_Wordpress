@@ -1,0 +1,12 @@
+---
+#Install packages
+- name: update system
+  yum: name=* state=latest
+- name: Installing packages
+  yum:
+    name:
+      - mariadb
+      - mariadb-server
+      - python3-PyMySQL
+      - nano
+    state: latest

@@ -1,0 +1,15 @@
+---
+# Start and stop Apache
+- name: Start and Enable httpd service
+  service: name=httpd state=restarted enabled=yes
+
+- name: Start mariadb
+  service:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: Put SELinux in permissive mode, logging actions that would be blocked.
+  selinux:
+    policy: targeted
+    state: disabled

@@ -1,0 +1,7 @@
+---
+# Variables for wordpress and sql
+mysql_root_password: ""
+database_name: ""
+database_user: ""
+database_password: ""
+database_host: ""

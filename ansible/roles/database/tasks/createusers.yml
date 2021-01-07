@@ -1,0 +1,51 @@
+---
+#start mysql service, create admin user, create wordpress database and delete remote user
+- name: start mariadb
+  service:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: set root password mariadb
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    user: root
+    check_implicit_admin: true
+    password: "{{ mysql_root_password }}"
+    host: localhost
+
+- name: Create Database user admin
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ database_user }}"
+    password: "{{ database_password }}"
+    host: '%'
+    priv: '*.*:ALL'
+    state: present
+
+- name: Create Database user admin
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ database_user }}"
+    password: "{{ database_password }}"
+    priv: '*.*:ALL'
+    state: present
+
+- name: create wordpress Database
+  mysql_db:
+    login_user: "{{ database_user }}"
+    login_password: "{{ database_password }}"
+    name: "{{ database_name }}"
+    state: present
+
+- name: delete remote root
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    user: root
+    check_implicit_admin: true
+    host: "{{ ansible_fqdn }}"
+    state: absent

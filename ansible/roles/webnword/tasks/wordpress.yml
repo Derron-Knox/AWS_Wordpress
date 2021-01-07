@@ -1,0 +1,22 @@
+---
+#Wordpress playbook
+
+- name: Download Wordpress
+  shell: wget https://wordpress.org/latest.tar.gz && tar -xzf latest.tar.gz
+
+- name: Install wordpress files under Apache document root
+  shell: cp -r wordpress/* /var/www/html/
+
+- name: Grant ownership to Apache user
+  shell: sudo chown -R apache /var/www
+
+- name: Grant ownership to Apache group
+  shell: sudo chgrp -R apache /var/www
+
+- name: Change directory permissions
+  shell: sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+
+- name: Recursively change the file permissions
+  shell: find /var/www -type f -exec sudo chmod 0664 {} \;
+  notify:
+    - restart apache

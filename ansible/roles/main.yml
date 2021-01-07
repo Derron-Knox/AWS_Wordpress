@@ -1,0 +1,22 @@
+---
+- hosts: db-server
+  gather_facts: true
+  become: yes
+  remote_user: ec2-user
+  become_user: root
+  
+  vars_files: vars.yml
+
+  roles:
+    - database
+
+- hosts: wp-server
+  gather_facts: true
+  become: yes
+  remote_user: ec2-user
+  become_user: root
+
+  vars_files: vars.yml
+
+  roles:
+    - webnword

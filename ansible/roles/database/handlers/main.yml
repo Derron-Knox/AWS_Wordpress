@@ -1,0 +1,15 @@
+---
+# handlers file for webnword
+- name: restart apache
+  service: name=httpd state=restarted
+
+- name: restart firewalld service
+  systemd:
+    name: firewalld
+    state: reloaded
+
+- name: restart Mariadb
+  service:
+    name: mariadb
+    enabled: yes
+    state: restarted

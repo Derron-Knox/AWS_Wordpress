@@ -1,0 +1,20 @@
+---
+#open firewall ports and restart firewalld
+- name: open http port
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+
+- name: mariadb port
+  firewalld:
+    port: 3306/tcp
+    permanent: yes
+    state: enabled
+
+- name: open https port
+  firewalld:
+    service: https
+    state: enabled
+  notify:
+    restart firewalld service

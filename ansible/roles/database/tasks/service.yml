@@ -1,0 +1,12 @@
+---
+
+- name: Start mariadb
+  service:
+    name: mariadb
+    enabled: true
+    state: started
+
+- name: Put SELinux in permissive mode, logging actions that would be blocked.
+  selinux:
+    policy: targeted
+    state: disabled

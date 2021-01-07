@@ -1,0 +1,5 @@
+---
+#Copy configuration files
+- name: Copy mysql configuration file
+  copy: src=files/mariadb-server.cnf dest=/etc/my.cnf.d/
+  notify: restart Mariadb

@@ -1,0 +1,19 @@
+---
+#Install packages
+- name: update system
+  yum: name=* state=latest
+- name: Installing packages
+  yum:
+    name:
+      - wget
+      - curl
+      - tar
+      - httpd
+      - php-mysqlnd
+      - php-fpm
+      - php-json
+      - mariadb
+      - mariadb-server
+      - python3-PyMySQL
+      - nano
+    state: latest
